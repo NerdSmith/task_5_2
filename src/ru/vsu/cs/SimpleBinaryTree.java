@@ -1,6 +1,9 @@
 package ru.vsu.cs;
 
+import ru.vsu.cs.utils.BinaryTreeAlgorithms;
+
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.function.Function;
 
 public class SimpleBinaryTree<T> implements BinaryTree<T> {
@@ -40,6 +43,11 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
         public Color getColor() {
             return color;
         }
+
+        @Override
+        public void setColor(Color color) {
+            this.color = color;
+        }
     }
 
     private static class IndexWrapper {
@@ -58,6 +66,10 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
 
     public SimpleBinaryTree(Function<String, T> fromStrFunc) {
         this.fromStrFunc = fromStrFunc;
+    }
+
+    public SimpleBinaryTree() {
+        this(null);
     }
 
     @Override
@@ -167,10 +179,8 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
         return inner.getHeight(root);
     }
 
-    public static void main(String[] args) throws Exception {
-        SimpleBinaryTree<Integer> binaryTree = new SimpleBinaryTree<>(Integer::parseInt);
-        binaryTree.fromBracketNotation("80 (62 (55 (26 (5, 39), 57)), 94)");
-        int h = binaryTree.height();
-        System.out.println(h);
+    public void setNodeColors() {
+        ArrayList<Color> colors = BinaryTreeAlgorithms.getColorsList(this.height());
+        BinaryTreeAlgorithms.setColors(root, colors);
     }
 }

@@ -20,6 +20,10 @@ public interface BinaryTree<T> {
             return Color.BLACK;
         }
 
+        default void setColor(Color color) {
+            return;
+        }
+
         default String toBracketStr() {
             return BinaryTreeAlgorithms.toBracketStr(this);
         }
